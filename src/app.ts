@@ -15,7 +15,7 @@ app.use(sessionMiddleware);
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use('/auth', authRoutes);
+app.use('/', authRoutes);
 
 app.use(errorHandler);
 

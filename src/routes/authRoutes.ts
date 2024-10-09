@@ -8,8 +8,10 @@ const router = express.Router();
 router.get("/register", (req, res) => res.render("register"));
 router.post('/register', validateRegistration, validate, authController.register);
 
-router.post('/login', passport.authenticate('local'), authController.login);
-router.post('/logout', authController.logout);
-router.get('/profile', authController.profile);
+router.get("/login", (req, res) => {
+  res.render("login")
+})
+router.post("/login", passport.authenticate('local'), authController.login);
+router.get('/logout', authController.logout);
 
 export default router;

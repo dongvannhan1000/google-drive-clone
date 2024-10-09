@@ -4,7 +4,7 @@ import * as authService from '../services/authService';
 export const register = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const user = await authService.register(req.body);
-    res.status(201).json(user);
+    res.redirect('login');
   } catch (error) {
     next(error);
   }
