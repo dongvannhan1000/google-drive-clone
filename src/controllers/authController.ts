@@ -17,7 +17,7 @@ export const login = (req: Request, res: Response) => {
 export const logout = (req: Request, res: Response, next: NextFunction) => {
   req.logout((err) => {
     if (err) return next(err);
-    res.json({ message: 'Logged out successfully' });
+    res.redirect('/login');
   });
 };
 

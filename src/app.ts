@@ -4,6 +4,7 @@ import { sessionMiddleware } from './config/session';
 import authRoutes from './routes/authRoutes';
 import fileRoutes from './routes/fileRoutes';
 import { errorHandler } from './middleware/errorHandler';
+import methodOverride from 'method-override';
 
 const app = express();
 
@@ -15,9 +16,10 @@ app.use(express.urlencoded({extended: true}));
 app.use(sessionMiddleware);
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(methodOverride('_method'));
 
 app.use('/', authRoutes);
-app.use('/', fileRoutes);
+app.use('/files', fileRoutes);
 
 app.use(errorHandler);
 

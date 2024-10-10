@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thư mục của bạn</title>
+</head>
+<body>
+    <h1>Thư mục của bạn</h1>
+    
+    <ul>
+        <% folders.forEach(folder => { %>
+            <li>
+                <a href="/files/folders/<%= folder.id %>"><%= folder.name %></a>
+                <form action="/files/folders/<%= folder.id %>?_method=DELETE" method="POST" style="display: inline;">
+                    <input type="hidden" name="_method" value="DELETE">
+                    <button type="submit">Xóa</button>
+                </form>
+            </li>
+        <% }) %>
+    </ul>
+
+    <h2>Tạo thư mục mới</h2>
+    <form action="/files/folders" method="POST">
+        <input type="text" name="name" required placeholder="Tên thư mục">
+        <button type="submit">Tạo thư mục</button>
+    </form>
+
+    <a href="/files/upload">Tải lên tệp mới</a>
+    <a href="/logout">Đăng xuất</a>
+</body>
+</html>

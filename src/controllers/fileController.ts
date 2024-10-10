@@ -21,9 +21,9 @@ export const uploadFile = async (req: Request, res: Response) => {
         userId,
       },
     });
-    res.status(201).json(file);
+    res.redirect('/files/folders');
   } catch (error) {
-    res.status(500).json({ error: 'Error uploading file' });
+    res.status(500).render('error', { message: 'Error uploading file' });
   }
 };
 
@@ -54,8 +54,25 @@ export const uploadFileToFolder = async (req: Request, res: Response) => {
         folderId,
       },
     });
-    res.status(201).json(file);
+    res.redirect(`/files/folders/${folderId}`);
   } catch (error) {
-    res.status(500).json({ error: 'Error uploading file to folder' });
+    res.status(500).render('error', { message: 'Error uploading file to folder' });
+  }
+};
+
+export const deleteFile = async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const userId = (req.user as any).id;
+
+  try {
+    const deletedFile = await File.deleteMany({
+      where: { id: Number(id), userId },
+    });
+    if (deletedFile.count === 0) {
+      return res.status(404).render('error', { message: 'File not found' });
+    }
+    res.redirect('/files/folders');
+  } catch (error) {
+    res.status(500).render('error', { message: 'Error deleting file' });
   }
 };

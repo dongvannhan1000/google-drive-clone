@@ -34,4 +34,6 @@ router.delete('/folders/:id', isAuth, folderController.deleteFolder);
 // File routes within folders
 router.post('/folders/:folderId/upload', isAuth, upload.single('file'), fileController.uploadFileToFolder);
 
+router.delete('/files/:id', isAuth, fileController.deleteFile);
+
 export default router;
