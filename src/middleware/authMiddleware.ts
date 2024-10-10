@@ -1,6 +1,10 @@
 import { Request, Response, NextFunction } from "express";
 
-export const isAuth = (req: Request, res: Response, next: NextFunction) => {
+export interface AuthenticatedRequest extends Request {
+  user?: any;
+}
+
+export const isAuth = (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
   if (req.isAuthenticated()) {
     next();
   } else {

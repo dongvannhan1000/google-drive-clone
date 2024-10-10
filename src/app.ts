@@ -2,6 +2,7 @@ import express from 'express';
 import passport from './config/passport';
 import { sessionMiddleware } from './config/session';
 import authRoutes from './routes/authRoutes';
+import fileRoutes from './routes/fileRoutes';
 import { errorHandler } from './middleware/errorHandler';
 
 const app = express();
@@ -16,6 +17,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use('/', authRoutes);
+app.use('/', fileRoutes);
 
 app.use(errorHandler);
 

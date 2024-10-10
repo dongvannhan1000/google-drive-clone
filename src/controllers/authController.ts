@@ -11,7 +11,7 @@ export const register = async (req: Request, res: Response, next: NextFunction) 
 };
 
 export const login = (req: Request, res: Response) => {
-  res.json({ message: 'Logged in successfully', user: req.user });
+  res.redirect('/upload');
 };
 
 export const logout = (req: Request, res: Response, next: NextFunction) => {
